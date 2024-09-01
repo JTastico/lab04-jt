@@ -5,9 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,7 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Lab4Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ContentWithLazyColumn(modifier = Modifier.padding(innerPadding))
+                    ContentWithOutlinedTextField(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -28,24 +27,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ContentWithLazyColumn(modifier: Modifier = Modifier) {
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(5) { index ->
-            Text(
-                text = "Item $index",
-                modifier = Modifier.padding(16.dp)
-            )
-        }
-    }
+fun ContentWithOutlinedTextField(modifier: Modifier = Modifier) {
+    var text by remember { mutableStateOf("") }
+    OutlinedTextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Enter your name") },
+        modifier = modifier.padding(16.dp)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun LazyColumnPreview() {
+fun OutlinedTextFieldPreview() {
     Lab4Theme {
-        ContentWithLazyColumn()
+        ContentWithOutlinedTextField()
     }
 }
