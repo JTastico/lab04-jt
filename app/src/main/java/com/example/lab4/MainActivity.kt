@@ -61,12 +61,32 @@ fun InputField(label: String, value: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(label) },
+        label = { Text(text = label) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(16.dp),
+        colors = TextFieldDefaults.run {
+            outlinedTextFieldColors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                cursorColor = MaterialTheme.colorScheme.primary
+            )
+        },
+        textStyle = MaterialTheme.run { typography.body1.copy(color = colorScheme.onBackground) }
     )
 }
+
+fun OutlinedTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: () -> Unit,
+    modifier: Modifier,
+    colors: TextFieldColors,
+    textStyle: Any
+) {
+    TODO("Not yet implemented")
+}
+
 
 @Preview(showBackground = true)
 @Composable
